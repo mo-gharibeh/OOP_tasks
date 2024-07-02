@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,109 +10,82 @@ namespace _1._7._2024
 {
     public class Car
     {
-        protected int year;
-        protected string type;
-        protected string model;
-        protected string pallet_no;
-        protected string color;
-        protected string owner;
+
+        public string Make { get; set; }
+        public int Year { get; set; }
+        public string CarType { get; set; }
+        public double Price { get; set; }
+        public string Model { get; set; }
+        public string PalletNo { get; set; }
+        public string Color { get; set; }
 
 
-        public int Year
+        public Car(string make, int year, string carType, double price, string model, string palletNo, string color)
         {
-
-            set
-            {
-                year = value;
-            }
-            get { return year; }
+            Make = make;
+            Year = year;
+            CarType = carType;
+            Price = price;
+            Model = model;
+            PalletNo = palletNo;
+            Color = color;
         }
 
-
-
-        public Car(int year, string type, string model, string pallet_no, string color, string owner)
+        
+        // Method Start
+        void Start()
         {
-            this.year = year;
-            this.type = type;
-            this.model = model;
-            this.pallet_no = pallet_no;
-            this.color = color;
-            this.owner = owner;
+            Console.WriteLine("the car is starting");
+        }
+        // Method Stop
+        void Stop()
+        {
+            Console.WriteLine("the car is stopping");
         }
 
-
-
-
-        protected void Start()
+        public void FullInformation()
         {
-            Console.WriteLine("the car has just started");
+            Console.WriteLine($" Thie information of car are {Make} , {Year} , {CarType} , {Price} , {Model} , {PalletNo} , {Color}");
         }
-
-
-        protected void Stop()
-        {
-            Console.WriteLine("the car has just stopped");
-        }
-
-
-        protected string Car_info()
-        {
-
-
-            return $"the car info is : year: {year} , type : {type} , model : {model} , pallet N.o {pallet_no} , color : {color}, owner: {owner}";
-
-        }
-
-
     }
 
+    // Derived class BMW
     public class BMW : Car
     {
-
-
-        public BMW(int year, string type, string model, string pallet_no, string color, string owner) : base(year, type, model, pallet_no, color, owner)
+        public BMW(int year, string carType, double price, string model, string palletNo, string color)
+            : base("BMW", year, carType, price, model, palletNo, color)
         {
-
-            this.year = year;
-            this.model = model;
-            this.pallet_no = pallet_no;
-            this.color = color;
-            this.type = type;
-            this.owner = owner;
-
-        }
-        public string GetCarInfo()
-        {
-            return Car_info();
-        }
-        public void GetStop()
-        {
-            Stop();
-
-        }
-        public void GetStart()
-        {
-            Start();
-
         }
     }
-    internal class Program
+
+
+
+
+        internal class Program
     {
         static void Main(string[] args)
         {
-            Car car = new Car(1633, "Marcedecs", "nm", "533102", "Green", "Rmzi");
+            Car myCar = new Car("Toyota", 2021, "SUV", 30000, "RAV4", "123456", "Red");
+            Console.WriteLine($"Make: {myCar.Make}");
+            Console.WriteLine($"Year: {myCar.Year}");
+            Console.WriteLine($"Type: {myCar.CarType}");
+            Console.WriteLine($"Price: {myCar.Price}");
+            Console.WriteLine($"Model: {myCar.Model}");
+            Console.WriteLine($"Pallet No: {myCar.PalletNo}");
+            Console.WriteLine($"Color: {myCar.Color}");
 
-            Console.WriteLine(car.Year);
-
-            BMW bmw_car = new BMW(2001, "ddd", "mm", "778963", "Black", "Mohmmad");
-
-            Console.WriteLine(bmw_car.Year);
-
-            Console.WriteLine(bmw_car.GetCarInfo());
-            bmw_car.GetStop();
-            bmw_car.GetStart();
+            myCar.FullInformation();
 
 
+            BMW bMW = new BMW( 1999, "ABC", 12, "1", "1234", "color");
+            Console.WriteLine(bMW.Year);
+            Console.WriteLine($"Make: {bMW.Make}");
+            Console.WriteLine($"Year: {bMW.Year}");
+            Console.WriteLine($"Type: {bMW.CarType}");
+            Console.WriteLine($"Price: {bMW.Price}");
+            Console.WriteLine($"Model: {bMW.Model}");
+            Console.WriteLine($"Pallet No: {bMW.PalletNo}");
+            Console.WriteLine($"Color: {bMW.Color}");
         }
     }
 }
